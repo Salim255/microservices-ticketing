@@ -6,3 +6,7 @@
 - tsc --init
 - npm install node-nats-streaming
 - npm install ts-node-dev typescript @types/node
+
+# To get access to a running pod inside a cluster
+
+- nats-test % kubectl port-forward nats-depl-7f46c9d9cd-g5qm6 4222:4222
