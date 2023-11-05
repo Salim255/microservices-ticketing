@@ -10,3 +10,4 @@
 # To get access to a running pod inside a cluster
 
 - nats-test % kubectl port-forward nats-depl-7f46c9d9cd-g5qm6 4222:4222
+- rs , then enter to restart a running programme in terminal

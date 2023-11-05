@@ -1,5 +1,5 @@
 import nats from "node-nats-streaming";
-
+console.clear();
 //Client to connect to our nats streaming server
 const stan = nats.connect("ticketing", "abc", {
   url: "http://localhost:4222",
@@ -21,7 +21,7 @@ stan.on("connect", () => {
   //The publish function is how we publish some data, when we call publish we are going to passe in the name of the the channel or the subject we want to publish this information to, and we'll also pass in the data we want to share as well
   stan.publish("ticket:created", data, () => {
     console.log("====================================");
-    console.log("Event published!");
+    console.log("Event published!!");
     console.log("====================================");
   });
 });
