@@ -12,6 +12,11 @@ stan.on("connect", () => {
   console.log("Listener connected to NATS");
   console.log("====================================");
 
+  stan.on("close", () => {
+    console.log("NATS connection closed");
+    process.exit();
+  });
+
   //The option setManualAckMode(true) allow us to retreat received event in case something went wrong during saving data in DB for example
   const options = stan.subscriptionOptions().setManualAckMode(true);
 
@@ -32,3 +37,7 @@ stan.on("connect", () => {
     msg.ack();
   });
 });
+
+//Intercept terminate or interrupt request to our program, then we close the client gracefully, then the client will not receive event while it's closing
+process.on("SIGINT", () => stan.close());
+process.on("SIGTERM", () => stan.close());
