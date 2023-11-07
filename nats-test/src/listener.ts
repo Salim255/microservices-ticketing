@@ -21,15 +21,15 @@ stan.on("connect", () => {
   const options = stan
     .subscriptionOptions()
     .setManualAckMode(true)
-    .setDeliverAllAvailable();
+    .setDeliverAllAvailable()
+    .setDurableName("orders-service-Queue-group");
 
   //this is the object that we're going to listen to and we're going to receive some data through the subscription
   const subscription = stan.subscribe(
     "ticket:created",
-
+    "gueue-group-name",
     options
   );
-  //"orders-service-Queue-group",
 
   subscription.on("message", (msg: Message) => {
     const data = msg.getData();
