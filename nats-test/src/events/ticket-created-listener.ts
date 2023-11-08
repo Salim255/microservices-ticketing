@@ -6,15 +6,15 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   subject: Subjects.TicketCreated = Subjects.TicketCreated;
 
   queGroupName = "payment-service";
-  onMessage(data: any, msg: Message): void {
+  onMessage(data: TicketCreatedEvent["data"], msg: Message): void {
     console.log("====================================");
     console.log("Event Data!", data);
     console.log("====================================");
 
     console.log("====================================");
-    console.log(data.name);
-
-    console.log(data.cost);
+    console.log(data.id);
+    console.log(data.title);
+    console.log(data.price);
 
     msg.ack();
   }
