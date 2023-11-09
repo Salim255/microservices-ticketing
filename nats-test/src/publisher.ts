@@ -7,17 +7,23 @@ const stan = nats.connect("ticketing", "abc", {
 });
 
 //Here we listen to connect event
-stan.on("connect", () => {
+stan.on("connect", async () => {
   console.log("====================================");
   console.log("Publisher connected to NATS ");
   console.log("====================================");
 
   const publisher = new TicketCreatedPublisher(stan);
-  publisher.publish({
-    id: "123",
-    title: "conecrt",
-    price: 50,
-  });
+  try {
+    await publisher.publish({
+      id: "123",
+      title: "conecrt",
+      price: 50,
+    });
+  } catch (error) {
+    console.log("====================================");
+    console.error(error);
+    console.log("====================================");
+  }
   //This is will be the information we want to share
   //In order to send data to NATS Streaming server we must convert the data to JSON format
   /*  const data = JSON.stringify({
